@@ -73,4 +73,5 @@ phenotypes are used in the mvLMM analysis
 #Trait one
 
 gemma -bfile PATHTO/output_bed -k PAHTTO/GEMMA_HZ.cXX.txt -lmm 4 -n 1 -o
-GWAS_HZ_lmm_trait1\`\`\`
+GWAS_HZ_lmm_trait1
+```
