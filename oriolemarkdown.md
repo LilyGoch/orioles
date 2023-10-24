@@ -26,7 +26,7 @@ vcftools --gzvcf oriole_beagle_output.vcf.gz --plink --out oriole_outputPlinkfor
 kept running into error “Invalid chromosome code ‘27’ on line10887551 of
 .map file. (This is disallowed for humans. Check if the problem is with
 your data, or if you forgot to define a different chromosome set with
-e.g. –chr-set.)”
+e.g. –chr-set.)” Fixed by –chr-set 28 no-mt
 
 # enter phenotypic information into the .fam file
 
@@ -71,6 +71,5 @@ phenotypes are used in the mvLMM analysis
 \#Trait one
 
 ``` bash
-gemma -bfile PATHTO/output_bed -k PAHTTO/GEMMA_HZ.cXX.txt -lmm 4 -n 1 -o
-GWAS_HZ_lmm_trait1
+gemma -bfile /workdir/lpg34/oriole_output_bed -k /workdir/lpg34/output/orioles.cXX.txt -lmm 4 -n 1 -o GWAS_HZ_lmm_trait1
 ```
