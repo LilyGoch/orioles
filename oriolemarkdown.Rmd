@@ -29,9 +29,9 @@ vcftools --gzvcf oriole_beagle_output.vcf.gz --plink --out oriole_outputPlinkfor
 # make .bed files
 
 ```{bash, eval=FALSE}
-/programs/plink-1.9-x86_64-beta5/plink --file oriole_outputPlinkformat --make-bed --allow-extra-chr 0 --out oriole_output_bed
+/programs/plink-1.9-x86_64-beta5/plink --file oriole_outputPlinkformat --make-bed --chr-set 28 no-mt --allow-extra-chr 0 --out oriole_output_bed
 ```
-kept running into error "Invalid chromosome code '27' on line10887551 of .map file. (This is disallowed for humans. Check if the problem is with your data, or if you forgot to define a different chromosome set with e.g. --chr-set.)
+kept running into error "Invalid chromosome code '27' on line10887551 of .map file. (This is disallowed for humans. Check if the problem is with your data, or if you forgot to define a different chromosome set with e.g. --chr-set.)"
 
 # enter phenotypic information into the .fam file
 
