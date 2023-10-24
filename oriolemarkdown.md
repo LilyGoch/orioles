@@ -3,36 +3,41 @@ oriole1
 Lily Goch
 2023-10-23
 
+# GWAS in GEMMA \##March 23, 2021
+
+prep beagle files - impute missing data
+
 ``` bash
-
-#GWAS in GEMMA ##March 23, 2021
-
-# prep beagle files - impute missing data
-
-java -Xmx96g -jar /programs/beagle4/beagle4.jar gt=FILENAME.vcf
-nthreads=20 out=FILENAME_beagle_output impute=true
+java -Xmx96g -jar /programs/beagle41/beagle41.jar gt=Orioles_filtered_final_093020_55individuals.recode.vcf nthreads=20 out=oriole_beagle_output impute=true
+```
 
 # create PLINK files
 
-vcftools --gzvcf FILENAME.vcf.gz --plink --out
-FILENAME_outputPlinkformat
+``` bash
+vcftools --gzvcf oriole_beagle_output.vcf.gz --plink --out oriole_outputPlinkformat
+```
 
 # make .bed files
 
-/programs/plink-1.9-x86_64-beta5/plink --file FILENAME_outputPlinkformat
---make-bed --allow-extra-chr 0 --out FILENAME_output_bed
+``` bash
+/programs/plink-1.9-x86_64-beta5/plink --file oriole_outputPlinkformat --make-bed --allow-extra-chr 0 --out oriole_output_bed
+```
+
+kept running into error “Invalid chromosome code ‘27’ on line10887551 of
+.map file. (This is disallowed for humans. Check if the problem is with
+your data, or if you forgot to define a different chromosome set with
+e.g. –chr-set.)
 
 # enter phenotypic information into the .fam file
 
-# KEEP TRACK OF COLUMN NUMBERS
+KEEP TRACK OF COLUMN NUMBERS
 
-# N1 = trait one
-
-# N2 = ...
+N1 = trait one \#haplotype
 
 # RUN GEMMA
 
-\#<https://www.xzlab.org/software/GEMMAmanual.pdf> \## GEMMA doesn't
+[gemma background
+manual](https://www.xzlab.org/software/GEMMAmanual.pdf) GEMMA doesn’t
 seem to like -9 as missing data value. Changing actual missing data to
 0. Adding 1 to each plumage score (1-5 instead of 0-4)
 
@@ -40,29 +45,32 @@ seem to like -9 as missing data value. Changing actual missing data to
 
 # 
 
-#gk: specify which type of kinship/relatedness matrix to generate
+\#gk: specify which type of kinship/relatedness matrix to generate
+
 (default 1; valid value 1-2; 1: centered matrix; 2: standardized
-matrix.) ##miss: specify missingness threshold (default 0.05) ##maf:
-specify minor allele frequency threshold (default 0.01) ##r2: specify
-r-squared threshold (default 0.9999) ##hwe: specify HWE test p value
+matrix.) \##miss: specify missingness threshold (default 0.05) \##maf:
+specify minor allele frequency threshold (default 0.01) \##r2: specify
+r-squared threshold (default 0.9999) \##hwe: specify HWE test p value
 threshold (default 0; no test)
 
-gemma -bfile PATHTO/output_bed -gk 1 -miss 1 -maf 0 -r2 1 -hwe 0 -o
-GEMMA_HZ
+``` bash
+gemma -bfile oriole_output_bed -gk 1 -miss 1 -maf 0 -r2 1 -hwe 0 -o orioles
+```
 
-## run GEMMA: univariate linear models
+output=GEMMA_HZ
 
-## 
+# run GEMMA: univariate linear models
 
-##lmm: linear mixed model (also can run lm or bslmm. read about models
-and determine the best option for your data) ##lmm (cont): specify
+\#lmm: linear mixed model (also can run lm or bslmm. read about models
+and determine the best option for your data) \#lmm (cont): specify
 frequentist analysis choice (default 1; valid value 1-4; 1: Wald test;
-2: likelihood ratio test; 3: score test; 4: all 1-3.) ##n: specify
+2: likelihood ratio test; 3: score test; 4: all 1-3.) \##n: specify
 phenotype column in the phenotype file (default 1); or to specify which
 phenotypes are used in the mvLMM analysis
 
-#Trait one
+\#Trait one
 
+``` bash
 gemma -bfile PATHTO/output_bed -k PAHTTO/GEMMA_HZ.cXX.txt -lmm 4 -n 1 -o
-GWAS_HZ_lmm_trait1\`\`\`
+GWAS_HZ_lmm_trait1
 ```
