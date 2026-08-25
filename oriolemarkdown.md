@@ -1,9 +1,9 @@
-oriole1
+Oriole GWAS in GEMMA
 ================
 Lily Goch
 2023-10-23
 
-# GWAS in GEMMA \##March 23, 2021
+# GWAS in GEMMA \##EDITED August 25 2026
 
 prep beagle files - impute missing data
 
@@ -23,23 +23,14 @@ vcftools --gzvcf oriole_beagle_output.vcf.gz --plink --out oriole_outputPlinkfor
 /programs/plink-1.9-x86_64-beta5/plink --file oriole_outputPlinkformat --make-bed --chr-set 28 no-mt --allow-extra-chr 0 --out oriole_output_bed
 ```
 
-kept running into error “Invalid chromosome code ‘27’ on line10887551 of
-.map file. (This is disallowed for humans. Check if the problem is with
-your data, or if you forgot to define a different chromosome set with
-e.g. –chr-set.)” Fixed by –chr-set 28 no-mt
-
 # enter phenotypic information into the .fam file
 
 KEEP TRACK OF COLUMN NUMBERS
-
+Column 6 is phenotype information
+Coded as 0 (BUOR) or 1 (BAOR), based on mitochondrial haplotype network
 N1 = trait one \#haplotype
 
 # RUN GEMMA
-
-[gemma background
-manual](https://www.xzlab.org/software/GEMMAmanual.pdf) GEMMA doesn’t
-seem to like -9 as missing data value. Changing actual missing data to
-0. Adding 1 to each plumage score (1-5 instead of 0-4)
 
 # generate relatedness matrix
 
@@ -68,7 +59,7 @@ frequentist analysis choice (default 1; valid value 1-4; 1: Wald test;
 phenotype column in the phenotype file (default 1); or to specify which
 phenotypes are used in the mvLMM analysis
 
-\#Trait one
+\#Trait one (Haplotype)
 
 ``` bash
 gemma -bfile /workdir/lpg34/oriole_output_bed -k /workdir/lpg34/output/orioles.cXX.txt -lmm 4 -n 1 -o GWAS_HZ_lmm_trait1
