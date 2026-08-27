@@ -19,17 +19,24 @@ Aug 26 2026: Finished 6 hrs 37 min 30 sec
 vcftools --gzvcf oriole_beagle_output.vcf.gz --plink --out oriole_outputPlinkformat
 ```
 
+After running on Aug 26 2026: Finished 273.00 seconds
+Unrecognized values for CHROM: chr1a - Replacing with 0
+Unrecognized values for CHROM: chr4a - Replacing with 0
+Similar output with scaffolds
+
 # make .bed files
 
 ``` bash
 /programs/plink-1.9-x86_64-beta5/plink --file oriole_outputPlinkformat --make-bed --chr-set 28 no-mt --allow-extra-chr 0 --out oriole_output_bed
 ```
 
+Aug 26 2026: Finished within a few seconds; did not give specific time.
+
 # enter phenotypic information into the .fam file
 
 KEEP TRACK OF COLUMN NUMBERS
 Column 6 is phenotype information
-Coded as 0 (BUOR) or 1 (BAOR), based on mitochondrial haplotype network
+Coded as 0 (BUOR) or 1 (BAOR), based on mitochondrial haplotype network / tree in Geneious (same result)
 N1 = trait one \#haplotype
 
 # RUN GEMMA
@@ -50,6 +57,8 @@ threshold (default 0; no test)
 gemma -bfile oriole_output_bed -gk 1 -miss 1 -maf 0 -r2 1 -hwe 0 -o orioles
 ```
 
+Aug 26 2026: Finished in few minutes. Did not give runtime.
+
 output=GEMMA_HZ
 
 # run GEMMA: univariate linear models
@@ -66,3 +75,5 @@ phenotypes are used in the mvLMM analysis
 ``` bash
 gemma -bfile /workdir/lpg34/oriole_output_bed -k /workdir/lpg34/output/orioles.cXX.txt -lmm 4 -n 1 -o GWAS_HZ_lmm_trait1
 ```
+
+Aug 26 2026: Started 22:33. Finished 23:01
