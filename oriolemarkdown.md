@@ -11,6 +11,8 @@ prep beagle files - impute missing data
 java -Xmx96g -jar /programs/beagle41/beagle41.jar gt=Orioles_filtered_final_093020_55individuals.recode.vcf nthreads=20 out=oriole_beagle_output impute=true
 ```
 
+Aug 26 2026: Finished 6 hrs 37 min 30 sec
+
 # create PLINK files
 
 ``` bash
